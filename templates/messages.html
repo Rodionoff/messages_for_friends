@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/messages_for_friends.css' %}">
+    <title>Messages</title>
+  </head>
+  <body>
+    <h1>Messages: </h1>
+    {% for message in messages %}
+      <ul>
+        <li>{{ message.text}}<br/> {{message.publish_date }} </li>
+      </ul>
+    {% endfor %}
+  </body>
+</html>

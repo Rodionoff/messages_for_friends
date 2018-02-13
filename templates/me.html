@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block me %}
+{% for message in messages %}
+<a href="{% url 'message_detail' pk=message.id %}">{{ message.name }}</a>
+<p>{{ message.text }}</p>
+<p>Author: {{ message.author }}</p>
+<p>{{ message.publish_date }}</p>
+<p>------------</p>
+{% endfor %}
+{% endblock %}
