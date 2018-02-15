@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 
-{% block me %}
+{% block content %}
+<div class="blog-header">
+  <h1 class="blog-title">Me</h1>
+  <p class="lead-blog-description">Пишу обо всём что придёт в голову головушку<p>
+</div>
 {% for message in messages %}
-<a href="{% url 'message_detail' pk=message.id %}">{{ message.name }}</a>
-<p>{{ message.text }}</p>
-<p>Author: {{ message.author }}</p>
-<p>{{ message.publish_date }}</p>
-<p>------------</p>
+<div>
+  <h2 class="blog-post-tile"><a href="{% url 'message_detail' pk=message.id %}">{{ message.name }}</a></h2>
+  <p class="blog-post meta">{{ message.publish_date }}
+  <br/>
+  Автор: {{ message.author }}</p>
+  <p>{{ message.text }}</p>
+</div>
+<hr>
 {% endfor %}
 {% endblock %}

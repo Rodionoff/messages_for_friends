@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>{{ message.name }}</p>
-<p>{{ message.text }}</p>
-<p>Author: {{ message.author }}</p>
-<p>{{ message.publish_date }}</p>
-<p>message_detail</p>
+<div>
+  <h2 class="blog-post-tile">{{ message.name }}</h2>
+  <p class="blog-post meta">{{ message.publish_date }}
+  <br/>
+  Автор: {{ message.author }}</p>
+  <p>{{ message.text }}</p>
+</div>
 {% endblock %}
