@@ -8,7 +8,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^current_time/', views.current_time, name = "current_time"),
     url(r'^me/$', views.me, name="me"),
-    url(r'^me/(?P<pk>\d+)/$', views.message_detail, name='message_detail'),
+    url(r'^me/(?P<pk>\d+)/$', views.message_detail, name="message_detail"),
+    url(r'^me/(?P<pk>\d+)/new/$', views.new_message, name="new_message"),
     url(r'^you/$', views.you, name="you"),
     url(r'^you/(?P<pk>\d+)/$', views.message_detail, name="message_detail")
 
