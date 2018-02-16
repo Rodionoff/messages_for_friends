@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import Messages
+from .models import MeMessages, FriendsMessages
 from django.contrib.auth.models import User
 import datetime
 #def hello_world(request):
@@ -11,7 +11,7 @@ def hello_world(request):
     return render(request, "hello_world.html", {"hello": hello})
 
 def home(request):
-    messages_objects = Messages.objects.all()
+    messages_objects = MeMessages.objects.all()
     return render(request, "base.html", {"messages": messages_objects})
 
 def current_time(request):
@@ -22,18 +22,22 @@ def current_time(request):
     return render(request, "current_time.html", {"current_time": now_on})
 
 def me(request):
-    messages = Messages.objects.order_by("-publish_date")
+    messages = MeMessages.objects.order_by("-publish_date")
     return render(request, "me.html", { "messages": messages })
 
-def you(request):
-    messages = Messages.objects.order_by("-publish_date")
+def friends(request):
+    messages = FriendsMessages.objects.order_by("-publish_date")
     #messages1 = messages.filter(messages.author.!=admin)
-    return render(request, "you.html", {"messages": messages})
+    return render(request, "friends.html", {"messages": messages})
 
-def message_detail(request, pk):
-    message = get_object_or_404(Messages, pk=pk)
+def me_message_detail(request, pk):
+    message = get_object_or_404(MeMessages, pk=pk)
     #message = Messages.objects.get(pk=pk)
-    return render(request, "message_detail.html", {"message": message})
+    return render(request, "me_message_detail.html", {"message": message})
+
+def friends_message_detail(request, pk):
+    message = get_object_or_404(FriendsMessages, pk=pk)
+    return render(request, "friends_message_detail.html", {"message": message})
 
 def new_message(request, pk):
     #new_message = get_object_or_404(Messages, pk=pk)
@@ -48,12 +52,12 @@ def new_message(request, pk):
         now_on = "%s" %now
         publish_date = now_on
 
-        message = Messages.objects.create(
+        message = MeMessages.objects.create(
             name = name,
             text = text,
             author = author,
             publish_date = publish_date)
 
-        return redirect('me')
+        return redirect('me_message_detail', pk=message.id)
 
     return render(request, "new_message.html")

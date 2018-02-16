@@ -3,9 +3,9 @@
 {% block content %}
 <div>
   <h2 class="blog-post-tile">{{ message.name }}</h2>
+  <p>{{ message.text }}</p>
   <p class="blog-post meta">{{ message.publish_date }}
   <br/>
   Автор: {{ message.author }}</p>
-  <p>{{ message.text }}</p>
 </div>
 {% endblock %}
