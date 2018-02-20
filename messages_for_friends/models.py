@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 class MeMessages(models.Model):
-    name = models.CharField(max_length=50, default="#")
+    name = models.CharField(max_length=50, default="")
     text = models.TextField()
     #author = models.CharField(max_length=50, default="me")
     author = models.ForeignKey('auth.User')
@@ -16,7 +16,7 @@ class MeMessages(models.Model):
         self.save()
 
 class FriendsMessages(models.Model):
-    name = models.CharField(max_length=50, default="#")
+    name = models.CharField(max_length=50, default="")
     text = models.TextField()
     #author = models.CharField(max_length=50, default="me")
     author = models.ForeignKey('auth.User')

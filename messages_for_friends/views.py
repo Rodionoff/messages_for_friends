@@ -2,7 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import MeMessages, FriendsMessages
 from django.contrib.auth.models import User
+from .forms import FriendsNewMessageForm
 import datetime
+from django.contrib.auth.decorators import login_required
+
 #def hello_world(request):
     #return HttpResponse("hello there!")
 
@@ -39,25 +42,41 @@ def friends_message_detail(request, pk):
     message = get_object_or_404(FriendsMessages, pk=pk)
     return render(request, "friends_message_detail.html", {"message": message})
 
-def new_message(request, pk):
+#ef friends_new_message(request):
     #new_message = get_object_or_404(Messages, pk=pk)
-    #return render(request, "new_message.html", {"new_message": new_message})
+    #return render(request, "new_message.html", {"new_message": new_message
+#    if request.method=="POST":
+#        name = request.POST['name']
+#        text = request.POST['message']
+#
+#        author = User.objects.first()
+#        now = datetime.datetime.now()
+#        now_on = "%s" %now
+#        publish_date = now_on
+#
+#        message = FriendsMessages.objects.create(
+#            name = name,
+#            text = text,
+#            author = author,
+#            publish_date = publish_date)
+#
+#        return redirect('friends_message_detail', pk=message.id)
+#
+#    return render(request, "friends_new_message.html")
+@login_required
+def friends_new_message(request):
 
-    if request.method=="POST":
-        name = request.POST['name']
-        text = request.POST['message']
+    if request.method == "POST":
+        form = FriendsNewMessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.author = request.user
+            now = datetime.datetime.now()
+            now_on = "%s" %now
+            message.publish_date = now_on
+            message.save()
 
-        author = User.objects.first()
-        now = datetime.datetime.now()
-        now_on = "%s" %now
-        publish_date = now_on
-
-        message = MeMessages.objects.create(
-            name = name,
-            text = text,
-            author = author,
-            publish_date = publish_date)
-
-        return redirect('me_message_detail', pk=message.id)
-
-    return render(request, "new_message.html")
+            return redirect("friends_message_detail", pk=message.id)
+    else:
+        form = FriendsNewMessageForm()
+    return render(request, "friends_new_message.html", {"form": form})

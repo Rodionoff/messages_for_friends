@@ -5,6 +5,9 @@
   <h1 class="blog-title">Friends</h1>
   <p class="lead-blog-description">Друзьяшки пишут<p>
 </div>
+<div class="mb-4">
+  <a href="{% url 'friends_new_message' %}" class="btn btn-primary">New massage</a>
+</div>
 {% for message in messages %}
 <div>
   <h2 class="blog-post-tile"><a href="{% url 'friends_message_detail' pk=message.id %}">{{ message.name }}</a></h2>
