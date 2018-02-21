@@ -5,8 +5,8 @@ from django.utils import timezone
 class MeMessages(models.Model):
     name = models.CharField(max_length=50, default="")
     text = models.TextField()
-    #author = models.CharField(max_length=50)
-    author = models.ForeignKey('auth.User')
+    author = models.CharField(max_length=50, default="myself")
+    #author = models.ForeignKey('auth.User', null=True)
     #author = models.ForeignKey(User)
     publish_date = models.DateTimeField(default=timezone.now)
 
@@ -19,9 +19,10 @@ class MeMessages(models.Model):
 class FriendsMessages(models.Model):
     name = models.CharField(max_length=50, default="")
     text = models.TextField()
+    author = models.CharField(max_length=50, default="myself")
     #author = models.CharField(max_length=50, default="me")
-    author = models.ForeignKey('auth.User')
-    #author = models.ForeignKey(User)
+    ##author = models.ForeignKey('auth.User')
+    #author = models.ForeignKey(User, null=True)
     #author = models.CharField(max_length=50)
     publish_date = models.DateTimeField(default=timezone.now)
 
