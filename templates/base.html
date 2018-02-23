@@ -15,9 +15,9 @@
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="{% url 'me' %}">Me</a>
-            <a class="navbar-brand" href="{% url 'current_time' %}">Current time</a>
             <a class="navbar-brand" href="{% url 'friends' %}">Friends</a>
+            <a class="navbar-brand" href="{% url 'current_time' %}">Current time</a>
+            <a class="navbar-brand" href="{% url 'me' %}">Me</a>
           </div>
           <div class="collapse navbar-collapse" id="mainMenu">
             {% if user.is_authenticated %}
@@ -44,6 +44,13 @@
           </div>
         </div>
       </nav>
+      <!--<p></p>
+      <label for="theme">Choose your theme: </label>
+        <select id="theme">
+          <option value="white">White</option>
+          <option value="black">Black</option>
+        </select>-->
+
       {% block breadcrumb %}
       {% endblock %}
     <p></p>

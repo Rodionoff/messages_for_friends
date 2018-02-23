@@ -6,16 +6,16 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
-    url(r'^$', views.home, name = "home"),
+    #url(r'^$', views.home, name = "home"),
     url(r'^hello_world/', views.hello_world, name = "hello_world"),
     url(r'^admin/', admin.site.urls),
     url(r'^current_time/', views.current_time, name = "current_time"),
     url(r'^me/$', views.me, name="me"),
     url(r'^me/(?P<pk>\d+)/$', views.me_message_detail, name="me_message_detail"),
     #url(r'^me/(?P<pk>\d+)/new/$', views.me_new_message, name="me_new_message"),
-    url(r'^friends/$', views.friends, name="friends"),
-    url(r'^friends/new_message/$', views.friends_new_message, name="friends_new_message"),
-    url(r'^friends/(?P<pk>\d+)/$', views.friends_message_detail, name="friends_message_detail"),
+    url(r'^$', views.friends, name="friends"),
+    url(r'^new_message/$', views.friends_new_message, name="friends_new_message"),
+    url(r'^(?P<pk>\d+)/$', views.friends_message_detail, name="friends_message_detail"),
     url(r'^signup/$', accounts_views.signup, name="signup"),
     url(r'^logout/$', auth_views.LogoutView.as_view(template_name="logout.html"), name="logout"),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
