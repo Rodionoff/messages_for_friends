@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '1=q!yrxrr^um8^li-l=)1f=v6k@cgn_x4qf1e%d*4#mnftkw#5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','tabaluga.pythonanywhere.com']
 

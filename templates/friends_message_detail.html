@@ -8,4 +8,41 @@
   <br/>
   Автор: {{ message.author }}</p>
 </div>
+<p><hr/></p>
+
+<div class="container">
+    <div class="row">
+        <div class="comments col-md-9" id="comments">
+            <h3 class="mb-2">Comments</h3>
+            <!-- comment -->
+            {% for comment in message.comments.all %}
+            <div class="comment mb-2 row">
+                <div class="comment-content col-md-11 col-sm-10">
+                    <h6 class="small comment-meta">{{ comment.author }} {{ comment.publish_date }}</h6>
+                    <div class="comment-body">
+                        <p>
+                          {{ comment.text }}
+                        </p>
+                    </div>
+                </div>
+             </div>
+             {% empty %}
+             <div class="comment mb-2 row">
+                 <div class="comment-content col-md-11 col-sm-10">
+                     <div class="comment-body">
+                         <p>
+                           No comments here yet
+                         </p>
+                     </div>
+                 </div>
+              </div>
+             {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="row pt-2">
+    <div class="col-12">
+        <a class="btn btn-sm btn-primary" href="{% url 'add_comment_to_message' pk=message.pk %}">Comment</a>
+    </div>
+</div>
 {% endblock %}

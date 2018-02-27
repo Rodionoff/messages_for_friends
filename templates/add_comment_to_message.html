@@ -1,0 +1,15 @@
+{% extends 'friends_message_detail.html' %}
+
+{% block content %}
+    <!--<h1>New comment</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Send</button>
+    </form>-->
+    <h1>New comment</h1>
+    <form method="POST" novalidate>
+      {% csrf_token %}
+      {% include "includes/form.html" %}
+      <button type="submit">Send</button>
+    </form>
+{% endblock %}

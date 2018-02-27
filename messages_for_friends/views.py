@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import MeMessages, FriendsMessages
 from django.contrib.auth.models import User
-from .forms import FriendsNewMessageForm
+from .forms import FriendsNewMessageForm, CommentForm
 import datetime
 from django.contrib.auth.decorators import login_required
 
@@ -40,6 +40,7 @@ def me_message_detail(request, pk):
 
 def friends_message_detail(request, pk):
     message = get_object_or_404(FriendsMessages, pk=pk)
+    #comments = message.comments.order_by("-publish_date")
     return render(request, "friends_message_detail.html", {"message": message})
 
 #ef friends_new_message(request):
@@ -80,3 +81,18 @@ def friends_new_message(request):
     else:
         form = FriendsNewMessageForm()
     return render(request, "friends_new_message.html", {"form": form})
+
+@login_required
+def add_comment_to_message(request, pk):
+    message = get_object_or_404(FriendsMessages, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.message = message
+            comment.author = request.user
+            comment.save()
+            return redirect('friends_message_detail', pk=message.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'add_comment_to_message.html', {'form': form})

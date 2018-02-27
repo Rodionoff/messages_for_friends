@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^$', views.friends, name="friends"),
     url(r'^new_message/$', views.friends_new_message, name="friends_new_message"),
     url(r'^(?P<pk>\d+)/$', views.friends_message_detail, name="friends_message_detail"),
+    url(r'^(?P<pk>\d+)/comment/$', views.add_comment_to_message, name="add_comment_to_message"),
     url(r'^signup/$', accounts_views.signup, name="signup"),
     url(r'^logout/$', auth_views.LogoutView.as_view(template_name="logout.html"), name="logout"),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),

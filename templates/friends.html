@@ -15,6 +15,7 @@
   <p class="blog-post meta">{{ message.publish_date }}
   <br/>
   Автор: {{ message.author }}</p>
+  <a href="{% url 'friends_message_detail' pk=message.pk %}">Comments: {{ message.comments.count }}</a>
 </div>
 <hr>
 {% endfor %}

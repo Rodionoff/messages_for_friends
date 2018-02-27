@@ -31,3 +31,12 @@ class FriendsMessages(models.Model):
 
     def publish(self):
         self.save()
+
+class Comment(models.Model):
+    message = models.ForeignKey("FriendsMessages", related_name="comments")
+    author = models.ForeignKey("auth.User")
+    text = models.TextField(max_length=550)
+    publish_date = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ["-publish_date"]
