@@ -1,2 +1,2 @@
 # blog-for-friends
-#### django blog from 2018 :)
+django blog from 2018 :)
